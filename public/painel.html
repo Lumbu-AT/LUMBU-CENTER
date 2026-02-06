@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Painel LUMBU</title>
+
+<style>
+body{font-family:Arial;background:#f7f2e8;}
+.container{max-width:900px;margin:40px auto;}
+.box{border:2px solid green;padding:20px;margin-bottom:20px;}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+<h1>Painel LUMBU</h1>
+
+<div class="box">
+<h2>Painel do Aluno</h2>
+<ul>
+<li>Aulas em vídeo</li>
+<li>Materiais em PDF</li>
+<li>Chat com professor</li>
+<li>Minhas inscrições</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>Painel do Professor</h2>
+<ul>
+<li>Postar aula</li>
+<li>Enviar tarefas</li>
+<li>Gerir alunos</li>
+</ul>
+</div>
+
+</div>
+
+<script>
+fetch("/me")
+.then(r=>r.json())
+.then(data=>{
+  if(!data.logged){
+    window.location.href="/";
+  }
+});
+</script>
+
+</body>
+</html>
