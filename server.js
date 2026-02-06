@@ -6,9 +6,12 @@ const path = require("path");
 const app = express();
 const db = new sqlite3.Database("database.db");
 
+// PORTA DINÂMICA (OBRIGATÓRIO NO RENDER)
+const PORT = process.env.PORT || 3000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(session({
   secret: "lumbu_secret",
@@ -25,6 +28,11 @@ CREATE TABLE IF NOT EXISTS users (
   senha TEXT,
   tipo TEXT
 )`);
+
+// Rota principal → abre index.html automaticamente
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/index.html"));
+});
 
 // Rota de cadastro
 app.post("/register", (req, res) => {
@@ -60,7 +68,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-// Rota para verificar sessão
+// Verificar sessão
 app.get("/me", (req, res) => {
   if (!req.session.user) {
     return res.json({ logged: false });
@@ -68,6 +76,6 @@ app.get("/me", (req, res) => {
   res.json({ logged: true, user: req.session.user });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando em http://localhost:3000");
+app.listen(PORT, () => {
+  console.log("Servidor rodando na porta " + PORT);
 });
