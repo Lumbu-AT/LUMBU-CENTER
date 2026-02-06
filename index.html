@@ -132,7 +132,31 @@ header h1{
   border:2px solid var(--verde);
   border-radius:8px;
 }
+  
+<section style="max-width:500px;margin:40px auto;background:#fff;padding:20px;border:2px solid gold;">
+<h2>Cadastro</h2>
+<form action="/register" method="POST">
+<input name="nome" placeholder="Nome" required><br>
+<input name="email" placeholder="Email" required><br>
+<input name="senha" placeholder="Senha" type="password" required><br>
 
+<select name="tipo">
+<option value="aluno">Aluno</option>
+<option value="professor">Professor</option>
+</select><br><br>
+
+<button>Cadastrar</button>
+</form>
+
+<h2>Login</h2>
+<form action="/login" method="POST">
+<input name="email" placeholder="Email" required><br>
+<input name="senha" type="password" placeholder="Senha" required><br>
+<button>Entrar</button>
+</form>
+</section>
+}
+    
 /* FOOTER */
 footer{
   text-align:center;
